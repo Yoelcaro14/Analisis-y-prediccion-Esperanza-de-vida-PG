@@ -20,12 +20,13 @@ import re
 # WEB
 
 def display_map(df,year,pais):
+
     if pais != 'All':
         df= df[(df['year'] == year )& (df['pais'] == pais)]
     else: 
         df= df[(df['year'] == year )]
 
-    map= folium.Map ( location=[30,-76],zoom_start=2, 
+    map= folium.Map ( location=[30,-86],zoom_start=2, 
                     scrollWheelZoom= False, tiles= 'CartoDB positron')
     choropleth = folium.Choropleth( geo_data ='C:/Users/yoe_1/OneDrive/Escritorio/Entorno/world-administrative-boundaries.geojson',
                                     data=df,
@@ -46,8 +47,10 @@ def display_map(df,year,pais):
         nombre_pais = feature['properties']['name']
         feature['properties']['Indicador'] = 'Indice:' + str('{:,}'.format(df.loc[nombre_pais,'edvan']) if nombre_pais in list(df.index) else 'N/A')  
     choropleth.geojson.add_child( folium.features.GeoJsonTooltip(['name','Indicador'],labels=False ) )
-    st_map = st_folium(map, width=600,height=600)
+    st_map = st_folium(map, width=530,height=600)
     return st_map
+
+# Display - FILTROS
 
 def display_time(df):
     year_list= list(df['year'].unique())
@@ -62,33 +65,28 @@ def display_countrie(df,country_name):
     pais= st.selectbox('Seleccionar Pais :',pais_list, pais_index)
     return pais
 
-def display_tables(df,year):
-    df = df[df['year']==year]
+def display_ingresos(df):#,country_name):
+    ingresos_list= ['All'] +list(df['NIVEL INGRESOS'].unique())
+    ingresos_list.sort()
+    # pais_index=ingresos_list.index(country_name) if country_name and country_name in ingresos_list else 0
+    ingresos= st.selectbox('Seleccionar Nivel de Ingresos :',ingresos_list)#, pais_index)
+    return ingresos
+
+# Display - TABLAS
+
+def display_tables(df,year,pais):
+    if pais != 'All':
+        df= df[(df['year'] == year )& (df['pais'] == pais)]
+    else: 
+        df= df[(df['year'] == year )]
+        
     paises_list = df.drop(['id_pais','year'],axis=1)
-    paises_list = paises_list.sort_values(by='edvan',ascending=False).reset_index(drop=True)
+    paises_list=paises_list.rename({'edvan': 'ESPRNZA.VIDA'}, axis=1)
+    paises_list = paises_list.sort_values(by='ESPRNZA.VIDA',ascending=False).reset_index(drop=True)
     # paises_list= paises_list.style.hide_index()
     paises_list=paises_list.set_index('pais')
     return paises_list
 
-# def pruebas():
-#     if st.button('Say hello'):
-#         st.write('Why hello there')
-#     else:
-#         st.write('Goodbye')
-
-
-def display_about():
-    st.header("Entendimiento de la situación actual")
-    st.markdown(
-    '''
-        El Departamento de Desarrollo Humano, Educación y Empleo (DHDEE) de la OEA, nos ha contratado 
-        con el fin de realizar un estudio y análisis sobre la evolución y progreso de la esperanza de 
-        vida en el Continente Americano. Teniendo como objetivo determinar y cuantificar cuáles son los
-        factores que inciden sobre la misma, haciendo énfasis en que la educación y el trabajo son los 
-        pilares fundamentales para el desarrollo humano y la calidad de vida de los mismos. Por otro lado, 
-        se pretende desarrollar un modelo que prediga la esperanza de vida teniendo en cuenta ciertas 
-        circunstancias aportadas por un usuario.
-    '''     )
 
 # Display - GRAFICOS
 
@@ -212,14 +210,34 @@ def display_grafico_nivel(df,pais):
 
 # Display - Metricas
 
-def display_metrics(df,pais,metric_title):
+def display_corr(df,pais,metric_title):
     val_corr = df[df["NOMBRE PAIS"] == pais].corr().loc['ESPERANZA'][1]
     return st.metric(metric_title,'{:,}'.format(round(val_corr,2)))
 
+def display_medias(df,pais,metric_title,sub_indice):
+    val_media = df[df["NOMBRE PAIS"] == pais].mean().loc[f'{sub_indice}']
+    return st.metric(metric_title,'{:,}'.format(round(val_media,2)))
+
+# Display - ABOUT
+
+def display_about():
+    st.header("Entendimiento de la situación actual")
+    st.markdown(
+    '''
+        El Departamento de Desarrollo Humano, Educación y Empleo (DHDEE) de la OEA, nos ha contratado 
+        con el fin de realizar un estudio y análisis sobre la evolución y progreso de la esperanza de 
+        vida en el Continente Americano. Teniendo como objetivo determinar y cuantificar cuáles son los
+        factores que inciden sobre la misma, haciendo énfasis en que la educación y el trabajo son los 
+        pilares fundamentales para el desarrollo humano y la calidad de vida de los mismos. Por otro lado, 
+        se pretende desarrollar un modelo que prediga la esperanza de vida teniendo en cuenta ciertas 
+        circunstancias aportadas por un usuario.
+    '''     )
+
+# Display - RESULTADOS
 
 def main():
 
-    # Encabezado
+    # ENCABEZADO
     image = Image.open('C:/Users/yoe_1/OneDrive/Escritorio/Entorno/imagenes/Logo1.png')
     st.image( image , caption=None, width=250, use_column_width=None, clamp=True, channels="RGB", output_format="auto")
     # st.set_page_config(page_title='Esperanza de Vida') #, page_icon='',  layout='wide')
@@ -229,12 +247,12 @@ def main():
 
     # LOAD DATA 
     df_exp_vida = pd.read_csv('C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/tbl_esperanza_vida_paises.csv')
-    dfEducacion = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Educacion.csv", usecols=['NOMBRE PAIS','ANIO','ED.INDEX','ESPERANZA'])
-    dfTrabajo = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Trabajo.csv", usecols = ['NOMBRE PAIS','ANIO','TRAB.INDEX','ESPERANZA'])
-    dfRecursos = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Recursos_Estado.csv", usecols = ['NOMBRE PAIS','ANIO','IND.ESTADO','ESPERANZA'])
-    dfMedio = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Medio_Ambiente.csv", usecols = ['NOMBRE PAIS','ANIO','AMB.INDEX','ESPERANZA'])
-    dfNivel = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Nivel_Vida.csv", usecols = ['NOMBRE PAIS','ANIO','IND.N.VIDA','ESPERANZA'])
-
+    dfEducacion = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Educacion.csv")#, usecols=['NOMBRE PAIS','ANIO','ED.INDEX','ESPERANZA'])
+    dfTrabajo = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Trabajo.csv")#, usecols = ['NOMBRE PAIS','ANIO','TRAB.INDEX','ESPERANZA'])
+    dfRecursos = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Recursos_Estado.csv")#, usecols = ['NOMBRE PAIS','ANIO','IND.ESTADO','ESPERANZA'])
+    dfMedio = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Medio_Ambiente.csv")#, usecols = ['NOMBRE PAIS','ANIO','AMB.INDEX','ESPERANZA'])
+    dfNivel = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Nivel_Vida.csv")#, usecols = ['NOMBRE PAIS','ANIO','IND.N.VIDA','ESPERANZA'])
+    dfIngresos = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/indice_ev_nivel_ingresos.csv", usecols = ['NOMBRE PAIS','PAIS','ANIO','NIVEL INGRESOS','ESPERANZA DE VIDA'])
 
     year = 2020
     pais= ''
@@ -254,7 +272,6 @@ def main():
                     "nav-link-selected": {"background-color": "black"}}
     )
 
-
     if selected == 'About':
         display_about()
         
@@ -265,6 +282,7 @@ def main():
             # Filtros (Año/Pais)
             year = 2020                                         #display_time(df_exp_vida)
             pais = display_countrie(dfEducacion,country_name)
+            ingresos = display_ingresos(dfIngresos)
 
             left_column, right_column = st.columns([2,1],gap="small")
             with left_column:
@@ -273,7 +291,7 @@ def main():
             with right_column:
                 # st.header("Tabla")
                 # st.write(display_tables(df_exp_vida,year).to_html(index=False), unsafe_allow_html=True)
-                st.dataframe(display_tables(df_exp_vida,year),height=600,width=250)
+                st.dataframe(display_tables(df_exp_vida,year,pais),height=600,width=250)
 
         st.write("---")     
 
@@ -285,50 +303,81 @@ def main():
                 st.subheader(f'Indice de Educacion en {pais}')
                 st.pyplot(display_grafico_educacion(dfEducacion,pais))
             with st.container():
-                st.subheader('Correlacion')
-                col1,col2,col3 = st.columns(3)
+                st.subheader('Estadísticos')
+                col1,col2,col3,col4 = st.columns([1,2,2,2])
                 with col1:
-                    display_metrics(dfEducacion,pais,metric_title)
+                    display_corr(dfEducacion,pais,metric_title)
+                with col2:
+                    display_medias(dfEducacion,pais,'Media del Ind.Educación','ED.INDEX')
+                with col3:
+                    display_medias(dfEducacion,pais,'Media de Alfabetización','ALFABETIZACION')
+                with col4:
+                    display_medias(dfEducacion,pais,'Media de Años Escolaridad','ANIOS ESCOLARIDAD')
+                
             #(2)
             with st.container():
                 st.write("---")
                 st.subheader(f'Indice de Trabajo en {pais}')
                 st.pyplot(display_grafico_trabajo(dfTrabajo,pais))            
             with st.container():
-                st.subheader('Correlacion')
-                col1,col2,col3 = st.columns(3)
+                st.subheader('Estadísticos')
+                col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.9])
                 with col1:
-                    display_metrics(dfTrabajo,pais,metric_title)
+                    str(display_corr(dfTrabajo,pais,metric_title))
+                with col2:
+                    display_medias(dfTrabajo,pais,'Media del Ind.Trabajo','TRAB.INDEX')              
+                with col3:
+                    display_medias(dfTrabajo,pais,'Media del Desmpleo','DESEMPLEO')
+                with col4:
+                    display_medias(dfTrabajo,pais,'Media de la Pobl. Activa','FUERZA LABORAL')
             ##(3)  
             with st.container():
                 st.write("---")
                 st.subheader(f'Indice Recursos y Estado en {pais}')
                 st.pyplot(display_grafico_recursos(dfRecursos,pais))
             with st.container():        
-                st.subheader('Correlacion')
-                col1,col2,col3 = st.columns(3)
+                st.subheader('Estadísticos')
+                col1,col2,col3,col4 = st.columns([1.2,1.5,1.5,1.5])
                 with col1:
-                    display_metrics(dfRecursos,pais,metric_title)
+                    display_corr(dfRecursos,pais,metric_title)
+                with col2:
+                    display_medias(dfRecursos,pais,'Media del Ind.Recursos/Estado','IND.ESTADO')
+                with col3:
+                    display_medias(dfRecursos,pais,'Media de Inv. en Salud','INVERSION SALUD')
+                with col4:
+                    display_medias(dfRecursos,pais,'Media de Inv. en Educación','INVERSION EDUCACION')
             #(4)
             with st.container():
                 st.write("---")
                 st.subheader(f'Indice Medio Ambiente y Estado en {pais}')
                 st.pyplot(display_grafico_medio(dfMedio,pais))
             with st.container():
-                st.subheader('Correlacion')
-                col1,col2,col3 = st.columns(3)
+                st.subheader('Estadísticos')
+                col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.1])
                 with col1:
-                    display_metrics(dfMedio,pais,metric_title)
+                    display_corr(dfMedio,pais,metric_title)
+                with col2:
+                    display_medias(dfMedio,pais,'Media del Ind.Med.Ambiente','AMB.INDEX')
+                with col3:
+                    display_medias(dfMedio,pais,'Media del Agot. de recursos','AGOTAMIENTO RECURSOS')
+                with col4:
+                    display_medias(dfMedio,pais,'Media de Emis. de CO2','EMISIONES CO2')
             #(5)
             with st.container():
                 st.write("---")
                 st.subheader(f'Indice Nivel de Vida en {pais}')
                 st.pyplot(display_grafico_nivel(dfNivel,pais))
             with st.container():
-                st.subheader('Correlacion')
-                col1,col2,col3 = st.columns(3)
+                st.subheader('Estadísticos')
+                col1,col2,col3,col4 = st.columns([1,1.3,1.3,1.3])
                 with col1:
-                    display_metrics(dfNivel,pais,metric_title)
+                    display_corr(dfNivel,pais,metric_title)
+                with col2:
+                    display_medias(dfNivel,pais,'Media del Ind.Nivel de vida','IND.N.VIDA')
+                with col3:
+                    display_medias(dfNivel,pais,'Media del Cons. Alcohol','CONSUMO ALCOHOL')
+                with col4:
+                    display_medias(dfNivel,pais,'Media del Cons. Tabaco','CONSUMO TABACO')
 
     if selected == 'ML':
         st.write('')  
@@ -337,24 +386,7 @@ def main():
         st.write('Datasets')
     
     
-            
-    # Display metrics
-    
 
-
-    # st.write(pruebas())
-
-    # Filtros
-    ## Año
-
-
-    # ## Pais
-    # country_list= list(df['pais'].unique())
-    # country_list.sort()
-    # country= st.sidebar.selectbox('pais',country_list)
-
-    # st.write(df.shape)
-    # st.write(df.head())
 
 
 
