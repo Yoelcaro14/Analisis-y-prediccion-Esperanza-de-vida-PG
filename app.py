@@ -16,36 +16,39 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 import seaborn as sns
 import re
+from indices import *
 
 # WEB
 
 def display_map(df,year,pais):
 
     if pais != 'All':
-        df= df[(df['year'] == year )& (df['pais'] == pais)]
+        df= df[(df['ANIO'] == year )& (df['NOMBRE PAIS'] == pais)]
     else: 
-        df= df[(df['year'] == year )]
+        df= df[(df['ANIO'] == year )]
 
     map= folium.Map ( location=[30,-86],zoom_start=2, 
                     scrollWheelZoom= False, tiles= 'CartoDB positron')
-    choropleth = folium.Choropleth( geo_data ='C:/Users/yoe_1/OneDrive/Escritorio/Entorno/world-administrative-boundaries.geojson',
+    choropleth = folium.Choropleth( geo_data ='Entorno/world-administrative-boundaries.geojson',
                                     data=df,
-                                    columns=( 'pais','edvan'),
+                                    columns=( 'NOMBRE PAIS','ESPERANZA'),
                                     key_on='feature.properties.name',
                                     line_opacity=0.8,
                                     highlight=True,
                                     fill_color ='YlOrRd', 
-                                    fill_opacity = 0.7
+                                    fill_opacity = 0.7,
+                                    legend_name="ESPERANZA"
                                     
     )
+   
     choropleth.geojson.add_to(map)
 
-    df = df.set_index('pais')
+    df = df.set_index('NOMBRE PAIS')
     # nombre_pais='Argentina'
 
     for feature in choropleth.geojson.data['features']:
         nombre_pais = feature['properties']['name']
-        feature['properties']['Indicador'] = 'Indice:' + str('{:,}'.format(df.loc[nombre_pais,'edvan']) if nombre_pais in list(df.index) else 'N/A')  
+        feature['properties']['Indicador'] = 'Indice:' + str('{:,}'.format(df.loc[nombre_pais,'ESPERANZA']) if nombre_pais in list(df.index) else 'N/A')  
     choropleth.geojson.add_child( folium.features.GeoJsonTooltip(['name','Indicador'],labels=False ) )
     st_map = st_folium(map, width=530,height=600)
     return st_map
@@ -53,38 +56,66 @@ def display_map(df,year,pais):
 # Display - FILTROS
 
 def display_time(df):
-    year_list= list(df['year'].unique())
+    year_list= list(df['ANIO'].unique())
     year_list.sort()
     year= st.selectbox('AÑO',year_list, len(year_list)-1)
     return year
 
-def display_countrie(df,country_name):
-    pais_list= ['All'] +list(df['NOMBRE PAIS'].unique())
+def display_ingresos(df):#,country_name):
+    # if pais!='All':
+        # ingresos_list= ['All']
+    # else: 
+        ingresos_list= ['All'] +list(df['NIVEL INGRESOS'].unique())
+        ingresos_list.sort()
+        # pais_index=ingresos_list.index(country_name) if country_name and country_name in ingresos_list else 0
+        ingresos= st.radio('Seleccionar Nivel de Ingresos :',ingresos_list,horizontal=True)#, pais_index)
+        return ingresos
+
+def display_countrie(df,country_name,ingresos):
+    if ingresos=='All':
+        pais_list= ['All'] +list(df['NOMBRE PAIS'].unique())
+    if ingresos!='All':
+        pais_list= ['All'] +list(df[df['NIVEL INGRESOS']==f'{ingresos}']['NOMBRE PAIS'].unique())
+
     pais_list.sort(reverse=False)
     pais_index=pais_list.index(country_name) if country_name and country_name in pais_list else 0
     pais= st.selectbox('Seleccionar Pais :',pais_list, pais_index)
-    return pais
 
-def display_ingresos(df):#,country_name):
-    ingresos_list= ['All'] +list(df['NIVEL INGRESOS'].unique())
-    ingresos_list.sort()
-    # pais_index=ingresos_list.index(country_name) if country_name and country_name in ingresos_list else 0
-    ingresos= st.selectbox('Seleccionar Nivel de Ingresos :',ingresos_list)#, pais_index)
-    return ingresos
+    return pais
 
 # Display - TABLAS
 
-def display_tables(df,year,pais):
-    if pais != 'All':
-        df= df[(df['year'] == year )& (df['pais'] == pais)]
-    else: 
-        df= df[(df['year'] == year )]
+# def display_tables(df,year,pais):
+#     if pais != 'All':
+#         df= df[(df['ANIO'] == year )& (df['NOMBRE PAIS'] == pais)]
+#     else: 
+#         df= df[(df['ANIO'] == year )]
         
-    paises_list = df.drop(['id_pais','year'],axis=1)
-    paises_list=paises_list.rename({'edvan': 'ESPRNZA.VIDA'}, axis=1)
+#     paises_list = df.drop(['PAIS','ANIO'],axis=1)
+#     paises_list=paises_list.rename({'ESPERANZA': 'ESPRNZA.VIDA'}, axis=1)
+#     paises_list = paises_list.sort_values(by='ESPRNZA.VIDA',ascending=False).reset_index(drop=True)
+#     # paises_list= paises_list.style.hide_index()
+#     paises_list=paises_list.set_index('NOMBRE PAIS',)
+#     paises_list.columns.name ='Pais'
+    
+#     return paises_list
+
+def display_tables(df,year,pais,ingresos):
+    if (pais == 'All') and (ingresos=='All'):
+        df = df[(df['ANIO'] == year )]
+    if ingresos != 'All':
+        df = df[df['NIVEL INGRESOS']==f'{ingresos}']
+    if pais != 'All': 
+        df= df[(df['ANIO'] == year )& (df['NOMBRE PAIS'] == pais)]
+    
+        
+    paises_list = df.drop(['PAIS','ANIO','NIVEL INGRESOS'],axis=1)
+    paises_list=paises_list.rename({'ESPERANZA': 'ESPRNZA.VIDA'}, axis=1)
     paises_list = paises_list.sort_values(by='ESPRNZA.VIDA',ascending=False).reset_index(drop=True)
     # paises_list= paises_list.style.hide_index()
-    paises_list=paises_list.set_index('pais')
+    paises_list=paises_list.set_index('NOMBRE PAIS',)
+    paises_list.columns.name ='Pais'
+    
     return paises_list
 
 
@@ -140,7 +171,7 @@ def display_grafico_recursos(df,pais):
 
     df = df[df["NOMBRE PAIS"] == pais]
     x = df["ANIO"]
-    y1 = df["IND.ESTADO"]
+    y1 = df["ESTADO.INDEX"]
     y2 = df["ESPERANZA"]
 
     fig = plt.figure(figsize=(12,6))
@@ -210,17 +241,101 @@ def display_grafico_nivel(df,pais):
 
 # Display - Metricas
 
-def display_corr(df,pais,metric_title):
-    val_corr = df[df["NOMBRE PAIS"] == pais].corr().loc['ESPERANZA'][1]
+def display_corr(df,pais,metric_title,sub_indice):
+    val_corr = df[df["NOMBRE PAIS"] == pais].corr().loc['ESPERANZA'][f'{sub_indice}']
     return st.metric(metric_title,'{:,}'.format(round(val_corr,2)))
 
 def display_medias(df,pais,metric_title,sub_indice):
     val_media = df[df["NOMBRE PAIS"] == pais].mean().loc[f'{sub_indice}']
     return st.metric(metric_title,'{:,}'.format(round(val_media,2)))
 
+# Display - DATA
+
+def display_data():
+    st.write("---")
+    st.header("Sobre la data")
+    st.markdown("""
+                En cuanto a la data, trabajamos con AWS como prestador de servicio. Se utilizo un motor de base de datos **Postgresql** el cual alojá
+                las tablas en una base de datos estrella. Las tablas fueron extraídas de, por ejemplo, el **World Data Bank**, la **OMS** entre otras 
+                fuentes.
+                """)
+    st.markdown("Creamos un Script, mediante el cual extraemos, transformamos y cargamos los datos de manera automatica.")
+    st.write("Para mas informacion, ingresar al informe [Aqui](https://docs.google.com/document/d/1jvehToFX1oxlBIWwyT8AS-2mqDl_QnCO/edit)")
+    st.write("---")
+    st.header("Ranking")
+    st.markdown("Veremos a continuacion un ranking de los países en cuanto a los indices elaborados")
+    ranking = st.radio("Ranking a mostrar", ("Habitos de Consumo", "Inversiones", "Ingreso Per Capita", "Años Escolaridad", "Desempleo"), horizontal = True)
+    
+    if ranking == "Habitos de Consumo":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        nivel_vida = df[['PAIS','NOMBRE PAIS','ANIO','CONSUMO ALCOHOL','CONSUMO TABACO','SERV SANITARIOS','ACCESO ELECTRICIDAD','ESPERANZA']]
+        nivel_vida.insert(5, "Consumo", ((nivel_vida["CONSUMO ALCOHOL"]+nivel_vida["CONSUMO TABACO"])/2))
+        nivel_vida = nivel_vida.groupby(["NOMBRE PAIS"]).mean()
+        nivel_vida= nivel_vida.sort_values(by=["Consumo"],ascending=False)
+        nivel_vida = nivel_vida.drop(columns = ["ANIO", "CONSUMO ALCOHOL", "CONSUMO TABACO" , "ACCESO ELECTRICIDAD", "ESPERANZA", "SERV SANITARIOS"])
+        st.dataframe(nivel_vida.head(10), width = 500)
+    if ranking == "Inversiones":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        recursos_estado = df[['PAIS','NOMBRE PAIS','ANIO','RENTA RECURSOS','INDUSTRIA','PIB','INVERSION SALUD','INVERSION EDUCACION','INVERSION DESARROLLO','GINI','ESPERANZA']]
+        recursos_estado.insert(10, "Inversion % PIB", (recursos_estado["INVERSION SALUD"]+recursos_estado["INVERSION DESARROLLO"]+recursos_estado["INVERSION EDUCACION"]))
+        recursos_estado = recursos_estado.groupby(["NOMBRE PAIS"]).mean()
+        recursos_estado = recursos_estado.sort_values(by=["Inversion % PIB"],ascending = False)
+        recursos_estado = recursos_estado.drop(columns = ['ANIO','RENTA RECURSOS','INDUSTRIA','PIB','INVERSION SALUD','INVERSION EDUCACION','INVERSION DESARROLLO','GINI','ESPERANZA'])
+        st.dataframe(recursos_estado.head(10), width = 500)
+    if ranking == "Ingreso Per Capita":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        ingreso_pc = df[['NOMBRE PAIS','INGRESO MEDIO PC']]
+        ingreso_pc = ingreso_pc.groupby(["NOMBRE PAIS"]).mean()
+        ingreso_pc = ingreso_pc.sort_values(by=["INGRESO MEDIO PC"], ascending=False)
+        ingreso_pc = ingreso_pc.rename(columns ={"INGRESO MEDIO PC" : "Ingreso Per Capita"})
+        st.dataframe(ingreso_pc.head(10), width = 500)
+    if ranking == "Años Escolaridad":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        años_escolaridad = df[['NOMBRE PAIS','ANIOS ESCOLARIDAD']]
+        años_escolaridad = round(años_escolaridad.groupby(["NOMBRE PAIS"]).mean(),2)
+        años_escolaridad = años_escolaridad.sort_values(by=["ANIOS ESCOLARIDAD"], ascending=False)
+        años_escolaridad = años_escolaridad.rename(columns ={"ANIOS ESCOLARIDAD" : "Años Escolaridad"})
+        st.dataframe(años_escolaridad.head(10), width = 500)
+    if ranking == "Desempleo":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        desempleo = df[['NOMBRE PAIS','DESEMPLEO']]
+        desempleo = round(desempleo.groupby(["NOMBRE PAIS"]).mean(),2)
+        desempleo = desempleo.sort_values(by=["DESEMPLEO"], ascending=False)
+        desempleo = desempleo.rename(columns ={"DESEMPLEO" : "Desempleo %"})
+        st.dataframe(desempleo.head(10), width = 500)
+    st.write("---")
+    st.header("Demostración de los datasets")
+    st.markdown("A continuación procederemos a mostrarles como es el resultado de la limpieza en una breve demostración.")
+    col1,col2 = st.columns(2)
+    extraido = False
+    transformado = False
+    with col1:
+        if st.button("Recien Extraido"):
+            extraido = True
+    with col2:
+        if st.button("Transformado"):
+            transformado = True
+    if extraido:
+        df = pd.read_csv("Extraccion/tbl_gini.csv")
+        df = df.sample(frac = 1,random_state = 5).reset_index()
+        st.dataframe(df.head(), width = 600)
+    if transformado:
+        df = pd.read_csv("Limpiados/tbl_gini.csv")
+        df = df.sample(frac = 1,random_state = 5).reset_index()
+        st.dataframe(df.head(), width = 600)
+
+
+
 # Display - ABOUT
 
 def display_about():
+    st.write("---")
+    st.markdown("# Sobre Nosotros")
+    st.markdown("""
+                ###### Somos integrantes de la compania Lorusso Asocs. y del grupo 7 de *SoyHenry* de la carrera *Data Science*.
+                """)
+    st.markdown("###### Los participantes somos Caneva Hugo, Cook Camilo, Carocancha Yoel y Lorusso Nicolas.")
+    st.markdown("---")
     st.header("Entendimiento de la situación actual")
     st.markdown(
     '''
@@ -232,13 +347,48 @@ def display_about():
         se pretende desarrollar un modelo que prediga la esperanza de vida teniendo en cuenta ciertas 
         circunstancias aportadas por un usuario.
     '''     )
+    st.write("---")
+    st.header("Objetivos")
+    st.markdown("""
+            Tenemos como objetivo determinar cuales son los factores mas influyentes dentro de la esperanza de vida.
+            Extraímos y elaboramos indicadores adecuados, según datos obtenidos de fuentes confiables y seguras.
+            Predecimos mediante un modelo de Machine Learning la esperanza de vida de los estados Involucrados
+    """
+    )
+    st.write("---")
+    st.header("Nuestra Solución")
+    st.markdown(""" 
+                Consideramos a la salud del individuo como eje principal y factor fundamental a la hora de estudiar la esperanza de vida del mismo. 
+                La salud del individuo no sólo depende de sí mismo, sino también del entorno que lo rodea, el medio ambiente donde éste se desarrolla, 
+                y las circunstancias socio-económicas del país o región donde reside. En resumen, podemos decir que la salud depende, en un principio, 
+                de dos grandes factores: el Interno o Individual y el Externo o del Entorno como podremos verlo representado a continuacion:
+                """)
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col2:
+        image = Image.open('Imagenes/Individuo.png')
+        st.image( image , caption=None, width=350, use_column_width=None, clamp=True, channels="RGB", output_format="auto")
+    st.write("Para mas informacion, ingresar al informe [Aqui](https://docs.google.com/document/d/1ziX75piXZ6Z_yS0-zLRovJk0PI4debMV/edit)")
+    st.write("---")
+    st.subheader("Indices")
+    st.markdown(""" Los indices con los cuales trabajamos esta problematica que fueron elaborados por nuestro equipo fueron 5.
+                """)
+    st.markdown("#### _Indice Trabajo:_") 
+    st.markdown("Compuesto por la Fuerza laboral, desempleo, ingreso medio per capita y poblacion de cada estado.")
+    st.markdown("#### _Indice Estado:_")
+    st.markdown("Compuesto por la inversion en salud, inversion en desarrollo, inversion en educacion, PIB e indice GINI de cada estado.")
+    st.markdown("#### _Indice Nivel de Vida:_")
+    st.markdown("Compuesto por el consumo de alcohol, consumo de tabajo, servicios sanitarios, acceso a electricidad y disponibilidad de agua de cada estado.")
+    st.markdown("#### _Indice medio ambiente:_")
+    st.markdown("Compuesto por las emisiones de CO2, contaminacion del aire, disponibilidad al agua, produccion de alimentos y agotamiento de recursos naturales de cada estado.")
+    st.markdown("#### _Indice Educación:_")
+    st.markdown("Compuesto por alfabetización y años de escolaridad de cada estado.")
 
 # Display - RESULTADOS
 
 def main():
 
     # ENCABEZADO
-    image = Image.open('C:/Users/yoe_1/OneDrive/Escritorio/Entorno/imagenes/Logo1.png')
+    image = Image.open('Entorno/imagenes/Logo1.png')
     st.image( image , caption=None, width=250, use_column_width=None, clamp=True, channels="RGB", output_format="auto")
     # st.set_page_config(page_title='Esperanza de Vida') #, page_icon='',  layout='wide')
 
@@ -246,13 +396,13 @@ def main():
     st.subheader('Analisis de la Esperanza de Vida del Continente Americano')
 
     # LOAD DATA 
-    df_exp_vida = pd.read_csv('C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/tbl_esperanza_vida_paises.csv')
-    dfEducacion = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Educacion.csv")#, usecols=['NOMBRE PAIS','ANIO','ED.INDEX','ESPERANZA'])
-    dfTrabajo = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Trabajo.csv")#, usecols = ['NOMBRE PAIS','ANIO','TRAB.INDEX','ESPERANZA'])
-    dfRecursos = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Recursos_Estado.csv")#, usecols = ['NOMBRE PAIS','ANIO','IND.ESTADO','ESPERANZA'])
-    dfMedio = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Medio_Ambiente.csv")#, usecols = ['NOMBRE PAIS','ANIO','AMB.INDEX','ESPERANZA'])
-    dfNivel = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/Indice_Nivel_Vida.csv")#, usecols = ['NOMBRE PAIS','ANIO','IND.N.VIDA','ESPERANZA'])
-    dfIngresos = pd.read_csv("C:/Users/yoe_1/OneDrive/Escritorio/Entorno/datasets/indice_ev_nivel_ingresos.csv", usecols = ['NOMBRE PAIS','PAIS','ANIO','NIVEL INGRESOS','ESPERANZA DE VIDA'])
+    df_exp_vida = tbl_esperanza_vida_paises
+    dfEducacion = educacion 
+    dfTrabajo = trabajo
+    dfRecursos = ind_estado
+    dfMedio = medio_ambiente
+    dfNivel = nivel_vida
+    dfIngresos = Nivel_Ingresos
 
     year = 2020
     pais= ''
@@ -266,10 +416,10 @@ def main():
             options=['About','Visual','ML', 'Data'],
             icons=['bookmark-check-fill','house','envelope'],
             orientation='horizontal',
-            styles={"container": {"padding": "0!important", "background-color": "orange"},
-                    "icon": {"color": "red", "font-size": "25px"}, 
-                    "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-                    "nav-link-selected": {"background-color": "black"}}
+            styles={"container": {"padding": "0!important", "background-color": "#D35400"},
+                    "icon": {"color": "#E02109", "font-size": "25px"}, 
+                    "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#DC7633"},
+                    "nav-link-selected": {"background-color": "black", "color" : "yellow"}}
     )
 
     if selected == 'About':
@@ -280,18 +430,21 @@ def main():
         with st.container():
             st.write("---")
             # Filtros (Año/Pais)
-            year = 2020                                         #display_time(df_exp_vida)
-            pais = display_countrie(dfEducacion,country_name)
-            ingresos = display_ingresos(dfIngresos)
-
-            left_column, right_column = st.columns([2,1],gap="small")
+            year = 2020                                        
+            left_column, right_column = st.columns([2,1.3],gap="small")
+            with left_column:
+                ingresos = display_ingresos(dfIngresos)
+            with right_column:
+                pais = display_countrie(dfIngresos,country_name,ingresos)
+            # Mapa / Tabla
+            left_column, right_column = st.columns([2,1.3],gap="small")
             with left_column:
                 # st.header("Mapa")
                 country_name = display_map(df_exp_vida,year,pais)
             with right_column:
                 # st.header("Tabla")
-                # st.write(display_tables(df_exp_vida,year).to_html(index=False), unsafe_allow_html=True)
-                st.dataframe(display_tables(df_exp_vida,year,pais),height=600,width=250)
+                # st.write(display_tables(dfIngresos,year,pais,ingresos).to_html(index=False), unsafe_allow_html=True)
+                st.dataframe(display_tables(dfIngresos,year,pais,ingresos),height=600,width=300)
 
         st.write("---")     
 
@@ -306,7 +459,7 @@ def main():
                 st.subheader('Estadísticos')
                 col1,col2,col3,col4 = st.columns([1,2,2,2])
                 with col1:
-                    display_corr(dfEducacion,pais,metric_title)
+                    display_corr(dfEducacion,pais,metric_title,'ED.INDEX')
                 with col2:
                     display_medias(dfEducacion,pais,'Media del Ind.Educación','ED.INDEX')
                 with col3:
@@ -323,7 +476,7 @@ def main():
                 st.subheader('Estadísticos')
                 col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.9])
                 with col1:
-                    str(display_corr(dfTrabajo,pais,metric_title))
+                    display_corr(dfTrabajo,pais,metric_title,'TRAB.INDEX')
                 with col2:
                     display_medias(dfTrabajo,pais,'Media del Ind.Trabajo','TRAB.INDEX')              
                 with col3:
@@ -339,9 +492,9 @@ def main():
                 st.subheader('Estadísticos')
                 col1,col2,col3,col4 = st.columns([1.2,1.5,1.5,1.5])
                 with col1:
-                    display_corr(dfRecursos,pais,metric_title)
+                    display_corr(dfRecursos,pais,metric_title,'ESTADO.INDEX')
                 with col2:
-                    display_medias(dfRecursos,pais,'Media del Ind.Recursos/Estado','IND.ESTADO')
+                    display_medias(dfRecursos,pais,'Media del Ind.Recursos/Estado','ESTADO.INDEX')
                 with col3:
                     display_medias(dfRecursos,pais,'Media de Inv. en Salud','INVERSION SALUD')
                 with col4:
@@ -355,7 +508,7 @@ def main():
                 st.subheader('Estadísticos')
                 col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.1])
                 with col1:
-                    display_corr(dfMedio,pais,metric_title)
+                    display_corr(dfMedio,pais,metric_title,'AMB.INDEX')
                 with col2:
                     display_medias(dfMedio,pais,'Media del Ind.Med.Ambiente','AMB.INDEX')
                 with col3:
@@ -371,7 +524,7 @@ def main():
                 st.subheader('Estadísticos')
                 col1,col2,col3,col4 = st.columns([1,1.3,1.3,1.3])
                 with col1:
-                    display_corr(dfNivel,pais,metric_title)
+                    display_corr(dfNivel,pais,metric_title,'IND.N.VIDA')
                 with col2:
                     display_medias(dfNivel,pais,'Media del Ind.Nivel de vida','IND.N.VIDA')
                 with col3:
@@ -383,52 +536,12 @@ def main():
         st.write('')  
 
     if selected == 'Data':
-        st.write('Datasets')
+        display_data()
     
     
-
-
 
 
 if __name__=='__main__':
     main()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-# with st.container():
-#     st.write("---")
-#     st.header("Get In Touch With Me!")
-#     st.write("##")
-
-#     # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
-#     contact_form = """
-#     <form action="https://formsubmit.co/YOUR@MAIL.COM" method="POST">
-#         <input type="hidden" name="_captcha" value="false">
-#         <input type="text" name="name" placeholder="Your name" required>
-#         <input type="email" name="email" placeholder="Your email" required>
-#         <textarea name="message" placeholder="Your message here" required></textarea>
-#         <button type="submit">Send</button>
-#     </form>
-#     """
-#     left_column, right_column = st.columns(2)
-#     with left_column:
-#         st.markdown(contact_form, unsafe_allow_html=True)
-#     with right_column:
-#         st.empty()

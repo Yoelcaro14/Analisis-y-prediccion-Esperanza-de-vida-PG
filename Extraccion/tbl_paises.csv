@@ -1,0 +1,36 @@
+id_pais,pais,longitude,latitude,incomeLevel,capitalCity
+ARG,Argentina,-58.4173,-34.6118,UMC,Buenos Aires
+ATG,Antigua and Barbuda,-61.8456,17.1175,HIC,Saint John's
+BHS,"Bahamas, The",-77.339,25.0661,HIC,Nassau
+BLZ,Belize,-88.7713,17.2534,UMC,Belmopan
+BOL,Bolivia,-66.1936,-13.9908,LMC,La Paz
+BRA,Brazil,-47.9292,-15.7801,UMC,Brasilia
+BRB,Barbados,-59.6105,13.0935,HIC,Bridgetown
+CAN,Canada,-75.6919,45.4215,HIC,Ottawa
+CHL,Chile,-70.6475,-33.475,HIC,Santiago
+COL,Colombia,-74.082,4.60987,UMC,Bogota
+CRI,Costa Rica,-84.0089,9.63701,UMC,San Jose
+CUB,Cuba,-82.3667,23.1333,UMC,Havana
+DMA,Dominica,-61.39,15.2976,UMC,Roseau
+DOM,Dominican Republic,-69.8908,18.479,UMC,Santo Domingo
+ECU,Ecuador,-78.5243,-0.229498,UMC,Quito
+GRD,Grenada,-61.7449,12.0653,UMC,Saint George's
+GTM,Guatemala,-90.5328,14.6248,UMC,Guatemala City
+GUY,Guyana,-58.1548,6.80461,UMC,Georgetown
+HND,Honduras,-87.4667,15.1333,LMC,Tegucigalpa
+HTI,Haiti,-72.3288,18.5392,LMC,Port-au-Prince
+JAM,Jamaica,-76.792,17.9927,UMC,Kingston
+KNA,St. Kitts and Nevis,-62.7309,17.3,HIC,Basseterre
+LCA,St. Lucia,-60.9832,14.0,UMC,Castries
+MEX,Mexico,-99.1276,19.427,UMC,Mexico City
+NIC,Nicaragua,-86.2734,12.1475,LMC,Managua
+PAN,Panama,-79.5188,8.99427,HIC,Panama City
+PER,Peru,-77.0465,-12.0931,UMC,Lima
+PRY,Paraguay,-57.6362,-25.3005,UMC,Asuncion
+SLV,El Salvador,-89.2073,13.7034,LMC,San Salvador
+SUR,Suriname,-55.1679,5.8232,UMC,Paramaribo
+TTO,Trinidad and Tobago,-61.4789,10.6596,HIC,Port-of-Spain
+URY,Uruguay,-56.0675,-34.8941,HIC,Montevideo
+USA,United States,-77.032,38.8895,HIC,Washington D.C.
+VCT,St. Vincent and the Grenadines,-61.2653,13.2035,UMC,Kingstown
+VEN,"Venezuela, RB",-69.8371,9.08165,INX,Caracas
