@@ -1,23 +1,25 @@
 ![LorussoLogo](https://scontent.fmdq3-1.fna.fbcdn.net/v/t39.30808-6/313263786_110911411815519_5789214515215323117_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=Uro4rsrXKA8AX_QfctZ&_nc_ht=scontent.fmdq3-1.fna&oh=00_AfAzh9i3mpLsiiAp1wuNUflN2prWxLmA6RYCGeY3ecaaog&oe=635DF96D)
 
-# **PROYECTO FINAL**
+# **PROYECTO FINAL , DATA SCIENCE SOY HENRY**
 
-![HenryMoon](https://blog.soyhenry.com/content/images/size/w2000/2022/01/Currcula-Henry.png)
+# <h1 align="center">**`Lorusso y Asocs.`**</h1>
 
+Este es nuestro proyecto final para SoyHenry, trabajamos con la esperanza de vida en el continente americano, mas especificamente, a los países pertenecientes a la OEA
 
-# <h1 align="center">**`¡Bienvenidos a bordo!`**</h1>
-
-Hemos llegado al último gran desafío de esta aventura.
-
-⚠️ **Advertencia**: ¡abrochar cinturones! 
+ **Integrantes**: Lorusso Nicolas, Caneva Hugo, Carocancha Yoel y Cook Camilo
 
 </br>
 
-## **¿Qué es el Proyecto Final?**
+## **¿En que consiste nuestro proyecto?**
 
-Consiste en el desarrollo de un proyecto de mayor envergadura, simulando una primera experiencia laboral dentro de un laboratorio educativo. El objetivo es integrar los conocimientos adquiridos en el bootcamp, enfrentarse al desafío de aprender nuevas habilidades técnicas y desarrollar soft skills que potencien el crecimiento del alumno.
+Nuestro proyecto consiste en poder determinar cuales son los factores mas incidentes en la esperanza de vida de un país, abordamos el trabajo desde 5 factores:
+## **1- Educacion**
+## **2- Trabajo**
+## **3- Nivel de vida**
+## **4- Medio Ambiente**
+## **5- Estado**
 
-Tendrán la libertad de elegir uno de los tres proyectos que aquí les presentamos:
+A partir de estos factores, creamos 5 indices 
 
 🚀 **Proyecto 1:** [Vuelos Comerciales](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Vuelos%20Comerciales.md)
 
