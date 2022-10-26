@@ -20,17 +20,22 @@ Nuestro proyecto consiste en poder determinar cuales son los factores mas incide
 </br>
 **3- Nivel de vida**
 </br>
-***4- Medio Ambiente**
+**4- Medio Ambiente**
 </br>
 **5- Estado**
 
-A partir de estos factores, creamos 5 indices 
+A partir de estos factores, creamos 5 indices.
+
+## **Nuestro camino**
+
+Para poder realizar el proyecto, por primera parte creamos un datawarehouse utilizando como prestador de servicio a AWS, creando una base de datos con el motor de base de datos PostgreSQL.
 
 🚀 **Proyecto 1:** [Vuelos Comerciales](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Vuelos%20Comerciales.md)
 
 🚀 **Proyecto 2:** [Amazon Reviews](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Amazon%20Reviews.md)
 
 🚀 **Proyecto 3:** [Esperanza de Vida al Nacer](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Esperanza%20de%20Vida%20al%20Nacer.md)
+
 
 
 
