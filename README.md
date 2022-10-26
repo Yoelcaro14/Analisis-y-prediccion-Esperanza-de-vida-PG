@@ -36,13 +36,23 @@ Obtuvimos los datasets a utilizar desde la API (utilizando wbgapi) del [World Da
 
 Se hizo una automatizacion para la carga de los datos extraídos (pipeline) y se organizó, primero, la base de datos en torno a 28 tablas, las cuales derivaron en solo 5 tablas con las variables y los indices antes mencionados.
 
-Proseguimos haciendo, ya con las 5 tablas, una Web APP con la herramienta *Streamlit* 
+Proseguimos haciendo, ya con las 5 tablas, una Web APP con la herramienta *Streamlit* dividida por cuatro secciones. *About* *Visual* *Machine Learning* *Data*
 
-🚀 **Proyecto 1:** [Vuelos Comerciales](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Vuelos%20Comerciales.md)
+Ya finalizando, creamos modelos de Machine Learning para predecir si se cumplian nuestras cuatro KPI's y por ultimo desarrollamos un dashboard en PowerBI para realizar la parte de Analytics del proyecto
+</br>
+**KPI 1 : % de aumento en la esperanza de vida en referencia hace 5 años**
+</br>
+**KPI 2 : Aumento en la esperanza de vida en 5 años (2025) si se invierte 5% adicional en educacion**
+</br>
+**KPI 3 : Aumento en la esperanza de vida en 5 años (2025) si se invierte 5% adicional en salud**
+</br>
+**KPI 4 : Aumentar la esperanza de vida 2.5 años en un periodo de 5 años (2025) si se disminuye la contaminacion PM 2.5 en 50%**
+</br>
 
-🚀 **Proyecto 2:** [Amazon Reviews](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Amazon%20Reviews.md)
 
-🚀 **Proyecto 3:** [Esperanza de Vida al Nacer](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Esperanza%20de%20Vida%20al%20Nacer.md)
+![PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e)
+
+
 
 
 
