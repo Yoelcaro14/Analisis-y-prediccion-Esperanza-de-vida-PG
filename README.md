@@ -13,10 +13,15 @@ Este es nuestro proyecto final para SoyHenry, trabajamos con la esperanza de vid
 ## **¿En que consiste nuestro proyecto?**
 
 Nuestro proyecto consiste en poder determinar cuales son los factores mas incidentes en la esperanza de vida de un país, abordamos el trabajo desde 5 factores:
+</br>
 **1- Educacion**
+</br>
 **2- Trabajo**
+</br>
 **3- Nivel de vida**
+</br>
 ***4- Medio Ambiente**
+</br>
 **5- Estado**
 
 A partir de estos factores, creamos 5 indices 
@@ -26,6 +31,7 @@ A partir de estos factores, creamos 5 indices
 🚀 **Proyecto 2:** [Amazon Reviews](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Amazon%20Reviews.md)
 
 🚀 **Proyecto 3:** [Esperanza de Vida al Nacer](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Esperanza%20de%20Vida%20al%20Nacer.md)
+
 
 
 
