@@ -30,13 +30,11 @@ A partir de estos factores, creamos 5 indices.
 
 Para poder realizar el proyecto, por primera parte creamos un datawarehouse utilizando como prestador de servicio a AWS, creando una base de datos con el motor de base de datos PostgreSQL.
 
+Obtuvimos los datasets a utilizar desde la API (utilizando wbgapi) del [World Data Bank](https://databank.worldbank.org/source/world-development-indicators) y con archivos CSV de otras fuentes confiables como la Organizacion Mundial de la Salud (OMS) entre otras
+
 🚀 **Proyecto 1:** [Vuelos Comerciales](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Vuelos%20Comerciales.md)
 
 🚀 **Proyecto 2:** [Amazon Reviews](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Amazon%20Reviews.md)
 
 🚀 **Proyecto 3:** [Esperanza de Vida al Nacer](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Esperanza%20de%20Vida%20al%20Nacer.md)
-
-
-
-
 
