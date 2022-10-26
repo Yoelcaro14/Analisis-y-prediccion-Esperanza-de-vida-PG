@@ -6,6 +6,8 @@
 
 Este es nuestro proyecto final para SoyHenry, trabajamos con la esperanza de vida en el continente americano, mas especificamente, a los países pertenecientes a la OEA entre los años 2000 y 2020.
 
+![America](https://scontent.fmdq3-1.fna.fbcdn.net/v/t39.30808-6/312714058_110927721813888_6899853069484865092_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=dvjZOlNvSE8AX-nppWf&tn=MQFV8DRSO5CZ_QiE&_nc_ht=scontent.fmdq3-1.fna&oh=00_AfCoq30PyNvWOraRJckITWs7AzpNCLqBSDHsTNDCta1SSg&oe=635F101F)
+
  **Integrantes**: Lorusso Nicolas, Caneva Hugo, Carocancha Yoel y Cook Camilo
 
 </br>
@@ -43,6 +45,9 @@ Proseguimos haciendo, ya con las 5 tablas, una Web APP con la herramienta *Strea
 🚀 **Proyecto 2:** [Amazon Reviews](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Amazon%20Reviews.md)
 
 🚀 **Proyecto 3:** [Esperanza de Vida al Nacer](https://github.com/soyHenry/PF_DATA/blob/main/Proyectos/Esperanza%20de%20Vida%20al%20Nacer.md)
+
+
+
 
 
 
