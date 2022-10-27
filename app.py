@@ -329,7 +329,12 @@ def display_data():
         df = pd.read_csv("Limpiados/tbl_gini.csv")
         df = df.sample(frac = 1,random_state = 5).reset_index()
         st.dataframe(df.head(), width = 600)
-
+    st.write("---")
+    st.markdown("Veremos ahora, algunos de los datasets trabajados.")
+    mostrar = st.radio("Dataset : " ("Mostrar"))
+    if mostrar == "Mostrar":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        st.dataframe(df.head(10), width = 800)
 
 
 # Display - ABOUT
