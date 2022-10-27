@@ -306,7 +306,7 @@ def display_data():
         df = pd.read_csv("Limpiados/data_completa.csv")
         contaminacion = df[['NOMBRE PAIS','CONTAMINACION AIRE']]
         contaminacion = contaminacion.groupby(["NOMBRE PAIS"]).mean()
-        contaminacion = ingreso_pc.sort_values(by=["CONTAMINACION AIRE"], ascending=False)
+        contaminacion = contaminacion.sort_values(by=["CONTAMINACION AIRE"], ascending=False)
         contaminacion = contaminacion.rename(columns ={"CONTAMINACION AIRE" : "Contaminacion"})
         st.dataframe(contaminacion.head(10), width = 500)
     st.write("---")
