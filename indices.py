@@ -241,7 +241,7 @@ trabajo.insert(7, "TRAB.INDEX", (trabajo["EMPLEADOS"]*trabajo["INGRESO MEDIO PC"
 ### MACHINE LEARNING
 
 
-df_kpi= pd.read_csv('C:/Users/yoe_1/OneDrive/Escritorio/Entorno/dataframe_predicciones_kpis.csv')
+df_kpi= pd.read_csv('dataframe_predicciones_kpis.csv')
 df_kpi['ds'] = pd.to_datetime(df_kpi['ds'])
 df_kpi['ds']=df_kpi['ds'].dt.year
 
