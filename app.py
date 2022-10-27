@@ -537,14 +537,14 @@ def main():
                 st.pyplot(display_grafico_educacion(dfEducacion,pais))
             with st.container():
                 st.subheader('Estadísticos')
-                col1,col2,col3,col4 = st.columns([1,2,2,2])
+                col1,col2,col3= st.columns([1,1,1])
                 with col1:
                     display_corr(dfEducacion,pais,metric_title,'ED.INDEX')
+                # with col2:
+                #     display_medias(dfEducacion,pais,'Media del Ind.Educación','ED.INDEX')
                 with col2:
-                    display_medias(dfEducacion,pais,'Media del Ind.Educación','ED.INDEX')
+                    display_medias(dfEducacion,pais,'Media de Alfabetización (%)','ALFABETIZACION')
                 with col3:
-                    display_medias(dfEducacion,pais,'Media de Alfabetización','ALFABETIZACION')
-                with col4:
                     display_medias(dfEducacion,pais,'Media de Años Escolaridad','ANIOS ESCOLARIDAD')
                 
             #(2)
@@ -554,13 +554,13 @@ def main():
                 st.pyplot(display_grafico_trabajo(dfTrabajo,pais))            
             with st.container():
                 st.subheader('Estadísticos')
-                col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.9])
+                col1,col2,col3= st.columns([1,1,1])
                 with col1:
                     display_corr(dfTrabajo,pais,metric_title,'TRAB.INDEX')
                 with col2:
-                    display_medias(dfTrabajo,pais,'Media del Ind.Trabajo','TRAB.INDEX')              
+                    display_medias(dfTrabajo,pais,'Media del Ingreso PC (dólares)','INGRESO MEDIO PC')              
                 with col3:
-                    display_medias(dfTrabajo,pais,'Media del Desmpleo','DESEMPLEO')
+                    display_medias(dfTrabajo,pais,'Media del Desmpleo(%)','DESEMPLEO')
                 # with col4:
                     # display_medias(dfTrabajo,pais,'Media de la Pobl. Activa','FUERZA LABORAL')
             ##(3)  
@@ -574,43 +574,13 @@ def main():
                 with col1:
                     display_corr(dfRecursos,pais,metric_title,'ESTADO.INDEX')
                 with col2:
-                    display_medias(dfRecursos,pais,'Media del Ind.Estado','ESTADO.INDEX')
+                    display_medias(dfRecursos,pais,'Media de Inv.Desarr.(%)','INVERSION DESARROLLO')
                 with col3:
-                    display_medias(dfRecursos,pais,'Media de Inv.Salud','INVERSION SALUD')
+                    display_medias(dfRecursos,pais,'Media de Inv.Salud (%)','INVERSION SALUD')
                 with col4:
-                    display_medias(dfRecursos,pais,'Media de Inv.Educación','INVERSION EDUCACION')
+                    display_medias(dfRecursos,pais,'Media de Inv.Educ.(%)','INVERSION EDUCACION')
             #(4)
             with st.container():
-                st.write("---")
-                st.subheader(f'Indice Medio Ambiente en {pais}')
-                st.pyplot(display_grafico_medio(dfMedio,pais))
-            with st.container():
-                st.subheader('Estadísticos')
-                col1,col2,col3,col4 = st.columns([1,1.5,1.5,1.1])
-                with col1:
-                    display_corr(dfMedio,pais,metric_title,'AMB.INDEX')
-                with col2:
-                    display_medias(dfMedio,pais,'Media del Ind.Med.Ambiente','AMB.INDEX')
-                with col3:
-                    display_medias(dfMedio,pais,'Media del Agot. recursos','AGOTAMIENTO RECURSOS')
-                with col4:
-                    display_medias(dfMedio,pais,'Media de Emis. CO2','EMISIONES CO2')
-            #(5)
-            with st.container():
-                st.write("---")
-                st.subheader(f'Indice Nivel de Vida en {pais}')
-                st.pyplot(display_grafico_nivel(dfNivel,pais))
-            with st.container():
-                st.subheader('Estadísticos')
-                col1,col2,col3,col4 = st.columns([1,1.3,1.3,1.3])
-                with col1:
-                    display_corr(dfNivel,pais,metric_title,'IND.N.VIDA')
-                with col2:
-                    display_medias(dfNivel,pais,'Media del Ind.Nivel vida','IND.N.VIDA')
-                with col3:
-                    display_medias(dfNivel,pais,'Media del Cons.Alcohol','CONSUMO ALCOHOL')
-                with col4:
-                    display_medias(dfNivel,pais,'Media del Cons.Tabaco','CONSUMO TABACO')
 
     if selected == 'ML':
         st.write("---")                                      
