@@ -254,7 +254,7 @@ def display_grafico_ML(df,pais_iso):
     ax1.plot(x, y2, color = "green", linewidth = 2, label = "Esperanza de vida real")
     ax1.set_ylabel( "Esperanza de vida proyectada")
 
-    plt.xticks(range(df["ds"].min(),df["ds"].max()+1,1))
+    plt.xticks(range(df["ds"].min(),df["ds"].max()+1,2))
     fig.legend(loc='upper left', facecolor='w', bbox_to_anchor=(0,1), bbox_transform=ax1.transAxes)
     plt.show()
     return fig 
