@@ -401,8 +401,7 @@ def display_data():
     mostrar = st.radio("Dataset :" ,("Mostrar", "Ocultar"), horizontal = True)
     if mostrar == "Mostrar":
         df = pd.read_csv("Limpiados/data_completa.csv")
-        df = df.sample(frac = 1,random_state = 5).reset_index()
-        df.drop(columns = ["Unnamed: 0"]
+        df = df.sample(frac = 1,random_state = 5)
         st.dataframe(df.head(20), width = 800)
 
 # Display - ABOUT
