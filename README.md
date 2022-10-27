@@ -40,17 +40,17 @@ Proseguimos haciendo, ya con las 5 tablas, una Web APP con la herramienta *Strea
 
 Ya finalizando, creamos modelos de Machine Learning para predecir si se cumplian nuestras cuatro KPI's y por ultimo desarrollamos un dashboard en PowerBI para realizar la parte de Analytics del proyecto
 </br>
-**KPI 1 : % de aumento en la esperanza de vida en referencia hace 5 años**
+**KPI 1 : Incrementar la esperanza de vida por lo menos 1 año aumentando los años de escolaridad 3 años**
 </br>
-**KPI 2 : Aumento en la esperanza de vida en 5 años (2025) si se invierte 5% adicional en educacion**
+**KPI 2 : Incrementar la esperanza de vida por lo menos 1 años aumentando los ingresos medios p/c un 15%**
 </br>
-**KPI 3 : Aumento en la esperanza de vida en 5 años (2025) si se invierte 5% adicional en salud**
+**KPI 3 : Incrementar la esperanza de vida por lo menos 2 años aumentando las inversiones un 20%**
 </br>
-**KPI 4 : Aumentar la esperanza de vida 2.5 años en un periodo de 5 años (2025) si se disminuye la contaminacion PM 2.5 en 50%**
+**KPI 4 : Incrementar la esperanza de vida por lo menos 2 años disminuyendo la contaminacion un 50%**
 </br>
 
 
-[Dashboard PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e)
+[Dashboard PowerBI](https://app.powerbi.com/groups/me/reports/8466ca34-7633-4f00-9df4-dd3b72853bd9/ReportSection2d5b2ba67c8cf353e65e)
 
 
 
