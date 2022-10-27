@@ -264,16 +264,15 @@ def display_data():
     st.write("---")
     st.header("Ranking")
     st.markdown("Veremos a continuacion un ranking de los países en cuanto a los indices elaborados")
-    ranking = st.radio("Ranking a mostrar", ("Habitos de Consumo", "Inversiones", "Ingreso Per Capita", "Años Escolaridad", "Desempleo"), horizontal = True)
+    ranking = st.radio("Ranking a mostrar", ("Indice Gini", "Inversiones", "Ingreso Per Capita", "Años Escolaridad", "Desempleo"), horizontal = True)
     
-    if ranking == "Habitos de Consumo":
+    if ranking == "Indice Gini":
         df = pd.read_csv("Limpiados/data_completa.csv")
-        nivel_vida = df[['PAIS','NOMBRE PAIS','ANIO','CONSUMO ALCOHOL','CONSUMO TABACO','SERV SANITARIOS','ACCESO ELECTRICIDAD','ESPERANZA']]
-        nivel_vida.insert(5, "Consumo", ((nivel_vida["CONSUMO ALCOHOL"]+nivel_vida["CONSUMO TABACO"])/2))
-        nivel_vida = nivel_vida.groupby(["NOMBRE PAIS"]).mean()
-        nivel_vida= nivel_vida.sort_values(by=["Consumo"],ascending=False)
-        nivel_vida = nivel_vida.drop(columns = ["ANIO", "CONSUMO ALCOHOL", "CONSUMO TABACO" , "ACCESO ELECTRICIDAD", "ESPERANZA", "SERV SANITARIOS"])
-        st.dataframe(nivel_vida.head(10), width = 500)
+        gini = df[['PAIS','NOMBRE PAIS','ANIO','GINI','ESPERANZA']]
+        gini = gini.groupby(["NOMBRE PAIS"]).mean()
+        gini= gini.sort_values(by=["GINI"],ascending=False)
+        gini = gini.drop(columns = ["ANIO", "ESPERANZA"])
+        st.dataframe(gini.head(10), width = 500)
     if ranking == "Inversiones":
         df = pd.read_csv("Limpiados/data_completa.csv")
         recursos_estado = df[['PAIS','NOMBRE PAIS','ANIO','RENTA RECURSOS','INDUSTRIA','PIB','INVERSION SALUD','INVERSION EDUCACION','INVERSION DESARROLLO','GINI','ESPERANZA']]
