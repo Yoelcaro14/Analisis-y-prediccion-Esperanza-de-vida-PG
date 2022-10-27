@@ -581,6 +581,32 @@ def main():
                     display_medias(dfRecursos,pais,'Media de Inv.Educ.(%)','INVERSION EDUCACION')
             #(4)
             with st.container():
+                st.write("---")
+                st.subheader(f'Indice Medio Ambiente en {pais}')
+                st.pyplot(display_grafico_medio(dfMedio,pais))
+            with st.container():
+                st.subheader('Estadísticos')
+                col1,col2,col3= st.columns([1,1,1])
+                with col1:
+                    display_corr(dfMedio,pais,metric_title,'AMB.INDEX')
+                with col2:
+                    display_medias(dfMedio,pais,'Media del Agot. recursos (%)','AGOTAMIENTO RECURSOS') # Puede ser prod. alimentos
+                with col3:
+                    display_medias(dfMedio,pais,'Media de Emis. CO2 (%)','EMISIONES CO2')
+            #(5)
+            with st.container():
+                st.write("---")
+                st.subheader(f'Indice Nivel de Vida en {pais}')
+                st.pyplot(display_grafico_nivel(dfNivel,pais))
+            with st.container():
+                st.subheader('Estadísticos')
+                col1,col2,col3 = st.columns([1,1,1])
+                with col1:
+                    display_corr(dfNivel,pais,metric_title,'IND.N.VIDA')
+                with col2:
+                    display_medias(dfNivel,pais,'Media del Acc. Electricidad(%)','ACCESO ELECTRICIDAD')
+                with col3:
+                    display_medias(dfNivel,pais,'Media del Cons. Tabaco (%)','CONSUMO TABACO')
 
     if selected == 'ML':
         st.write("---")                                      
