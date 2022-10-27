@@ -401,6 +401,7 @@ def display_data():
     mostrar = st.radio("Dataset :" ,("Mostrar", "Ocultar"), horizontal = True)
     if mostrar == "Mostrar":
         df = pd.read_csv("Limpiados/data_completa.csv")
+        df = df.groupby(["NOMBRE PAIS"]).mean()
         st.dataframe(df.head(20), width = 800)
 
 # Display - ABOUT
