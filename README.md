@@ -51,6 +51,7 @@ Ya finalizando, creamos modelos de Machine Learning para predecir si se cumplian
 
 
 [Dashboard PowerBI](https://app.powerbi.com/groups/me/reports/8466ca34-7633-4f00-9df4-dd3b72853bd9/ReportSection2d5b2ba67c8cf353e65e)
+</br>
 [Streamlit](https://nicolordev97-proyectogrupal-app-patch-1-4tufg7.streamlitapp.com/)
 
 
