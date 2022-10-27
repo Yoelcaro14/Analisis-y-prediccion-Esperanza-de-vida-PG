@@ -264,7 +264,7 @@ def display_data():
     st.write("---")
     st.header("Ranking")
     st.markdown("Veremos a continuacion un ranking de los países en cuanto a los indices elaborados")
-    ranking = st.radio("Ranking a mostrar", ("Indice Gini", "Inversiones", "Ingreso Per Capita", "Años Escolaridad", "Desempleo"), horizontal = True)
+    ranking = st.radio("Ranking a mostrar", ("Indice Gini", "Inversiones", "Ingreso Per Capita", "Años Escolaridad", "Desempleo","Contaminacion"), horizontal = True)
     
     if ranking == "Indice Gini":
         df = pd.read_csv("Limpiados/data_completa.csv")
@@ -302,6 +302,13 @@ def display_data():
         desempleo = desempleo.sort_values(by=["DESEMPLEO"], ascending=False)
         desempleo = desempleo.rename(columns ={"DESEMPLEO" : "Desempleo %"})
         st.dataframe(desempleo.head(10), width = 500)
+    if ranking == "Contaminacion":
+        df = pd.read_csv("Limpiados/data_completa.csv")
+        contaminacion = df[['NOMBRE PAIS','CONTAMINACION AIRE']]
+        contaminacion = contaminacion.groupby(["NOMBRE PAIS"]).mean()
+        contaminacion = ingreso_pc.sort_values(by=["CONTAMINACION AIRE"], ascending=False)
+        contaminacion = contaminacion.rename(columns ={"CONTAMINACION AIRE" : "Contaminacion"})
+        st.dataframe(contaminacion.head(10), width = 500)
     st.write("---")
     st.header("Demostración de los datasets")
     st.markdown("A continuación procederemos a mostrarles como es el resultado de la limpieza en una breve demostración.")
