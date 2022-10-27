@@ -331,7 +331,7 @@ def display_data():
         st.dataframe(df.head(), width = 600)
     st.write("---")
     st.markdown("Veremos ahora, algunos de los datasets trabajados.")
-    mostrar = st.radio("Dataset :" ,("Mostrar", "Ocultar"))
+    mostrar = st.radio("Dataset :" ,("Mostrar", "Ocultar"), horizontal = true)
     if mostrar == "Mostrar":
         df = pd.read_csv("Limpiados/data_completa.csv")
         st.dataframe(df.head(10), width = 800)
