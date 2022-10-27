@@ -29,7 +29,7 @@ def display_map(df,year,pais):
 
     map= folium.Map ( location=[30,-86],zoom_start=2, 
                     scrollWheelZoom= False, tiles= 'CartoDB positron')
-    choropleth = folium.Choropleth( geo_data ='Entorno/world-administrative-boundaries.geojson',
+    choropleth = folium.Choropleth( geo_data ='world-administrative-boundaries.geojson',
                                     data=df,
                                     columns=( 'NOMBRE PAIS','ESPERANZA'),
                                     key_on='feature.properties.name',
@@ -388,7 +388,7 @@ def display_about():
 def main():
 
     # ENCABEZADO
-    image = Image.open('Entorno/imagenes/Logo1.png')
+    image = Image.open('Imagenes/Logo1.png')
     st.image( image , caption=None, width=250, use_column_width=None, clamp=True, channels="RGB", output_format="auto")
     # st.set_page_config(page_title='Esperanza de Vida') #, page_icon='',  layout='wide')
 
