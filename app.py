@@ -402,7 +402,6 @@ def display_data():
     if mostrar == "Mostrar":
         df = pd.read_csv("Limpiados/data_completa.csv")
         df = df.sample(frac = 1,random_state = 5).reset_index()
-        df = df.drop(columns = ["index"]
         st.dataframe(df.head(20), width = 800)
 
 # Display - ABOUT
