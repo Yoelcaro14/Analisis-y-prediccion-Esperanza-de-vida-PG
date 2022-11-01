@@ -1,4 +1,4 @@
-![LorussoLogo](https://scontent.fmdq3-1.fna.fbcdn.net/v/t39.30808-6/313263786_110911411815519_5789214515215323117_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=Uro4rsrXKA8AX_QfctZ&_nc_ht=scontent.fmdq3-1.fna&oh=00_AfAzh9i3mpLsiiAp1wuNUflN2prWxLmA6RYCGeY3ecaaog&oe=635DF96D)
+![LorussoLogo](https://drive.google.com/file/d/1-i75AbrkBoaCRCJ0ez63qcZtAiDywpLf/view)
 
 # **PROYECTO GRUPAL FINAL , DATA SCIENCE SOY HENRY**
 
