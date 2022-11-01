@@ -1,5 +1,3 @@
-![LorussoLogo](https://drive.google.com/file/d/1-i75AbrkBoaCRCJ0ez63qcZtAiDywpLf/view)
-
 # **PROYECTO GRUPAL FINAL , DATA SCIENCE SOY HENRY**
 
 # <h1 align="center">**`Lorusso y Asocs.`**</h1>
@@ -31,8 +29,6 @@ A partir de estos factores, creamos 5 indices.
 Para poder realizar el proyecto, por primera parte creamos un datawarehouse utilizando como prestador de servicio a AWS, creando una base de datos con el motor de base de datos *PostgreSQL*.
 
 Obtuvimos los datasets a utilizar desde la API (utilizando wbgapi) del [World Data Bank](https://databank.worldbank.org/source/world-development-indicators) y con archivos CSV de otras fuentes confiables como la Organizacion Mundial de la Salud (OMS) entre otras.
-
-![DataWarehouse](https://scontent.fmdq3-1.fna.fbcdn.net/v/t39.30808-6/306332137_110927635147230_2178348703837984022_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=bo7XYUecuacAX8MEVus&_nc_ht=scontent.fmdq3-1.fna&oh=00_AfA3FyDDZ5wHRNjwS18PtUjEVw7AFanM27laCM5Fh45KvQ&oe=635E181C)
 
 Se hizo una automatizacion para la carga de los datos extraídos (pipeline) y se organizó, primero, la base de datos en torno a 28 tablas, las cuales derivaron en solo 5 tablas con las variables y los indices antes mencionados.
 
