@@ -1,10 +1,10 @@
-# **PROYECTO GRUPAL FINAL , DATA SCIENCE SOY HENRY**
+# <h1 align="center">Analisis y predicción de la esperanza de vida</h1>
 
-# <h1 align="center">**`Lorusso y Asocs.`**</h1>
+# <h1 align="center">*`Lorusso y Asocs.`*</h1>
 
 En nuestro proyecto grupal final para SoyHenry, trabajamos con la esperanza de vida en el continente americano, mas especificamente, a los países pertenecientes a la OEA entre los años 2000 y 2020.
 
- **Integrantes**: Lorusso Nicolas, Caneva Hugo, Carocancha Yoel y Cook Camilo
+ **Integrantes**: Carocancha Yoel, Lorusso Nicolas, Caneva Hugo y Cook Camilo
 
 </br>
 
