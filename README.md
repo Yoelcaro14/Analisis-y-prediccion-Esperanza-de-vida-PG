@@ -45,7 +45,7 @@ Ya finalizando, creamos modelos de Machine Learning para predecir si se cumplian
 
 ## RESULTADOS:
 
-### [Dashboard PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e) <h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/About.PNG)</h1></br>
+### [Dashboard PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e) <h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/PowBI.PNG)</h1></br>
 
 ### [Streamlit](https://nicolordev97-proyectogrupal-app-final-ucei56.streamlitapp.com/) <h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/About.PNG)</h1></br> <h1 align="center">![Streamlit2](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/Visual.PNG)</h1>
 
