@@ -1,6 +1,4 @@
-# <p align="center">**ANALISIS Y PREDICIÓN DE LA ESPERANZA DE VIDA**<p>
-
-# <h1 align="center">![imagen](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/Logo1.png)</h1>
+# </br><p align="center">**ANALISIS Y PREDICIÓN DE LA ESPERANZA DE VIDA**<p> <h1 align="center">![imagen](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/Logo1.png)</h1>
 
 En nuestro proyecto grupal final para SoyHenry, trabajamos con la esperanza de vida en el continente americano, mas especificamente, a los países pertenecientes a la OEA entre los años 2000 y 2020.
 **Integrantes**: Carocancha Yoel, Lorusso Nicolas, Caneva Hugo y Cook Camilo
@@ -47,12 +45,9 @@ Ya finalizando, creamos modelos de Machine Learning para predecir si se cumplian
 
 ## RESULTADOS:
 
-### [Dashboard PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e)
+### [Dashboard PowerBI](https://app.powerbi.com/view?r=eyJrIjoiZTkwNDJlNmMtNDRkOS00MWM4LWEyMjQtY2VkMmE1NjI0NDk4IiwidCI6IjQyM2U0YjljLTBjNTUtNDYyZC04OTA1LWU4NWQxZGNlZGJjZCJ9&pageName=ReportSection2d5b2ba67c8cf353e65e) <h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/About.PNG)</h1></br>
 
-
-### [Streamlit](https://nicolordev97-proyectogrupal-app-final-ucei56.streamlitapp.com/)
-
-## </br><h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/About.PNG)</h1></br> <h1 align="center">![Streamlit2](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/Visual.PNG)</h1>
+### [Streamlit](https://nicolordev97-proyectogrupal-app-final-ucei56.streamlitapp.com/) <h1 align="center">![Streamlit1](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/About.PNG)</h1></br> <h1 align="center">![Streamlit2](https://github.com/Yoelcaro14/Analisis-y-prediccion-Esperanza-de-vida-PG/blob/Final/Imagenes/Visual.PNG)</h1>
 
 
 
